@@ -1,5 +1,6 @@
 from django.db import models
 from attractions_info.models import AttractionsInfo
+from reviews.models import Review
 
 # Create your models here.
 
@@ -8,6 +9,7 @@ class Attraction(models.Model):
     description = models.TextField()
     approved = models.BooleanField(default=False)
     attractions_info = models.ManyToManyField(AttractionsInfo)
+    reviews = models.ManyToManyField(Review)
 
     def __str__(self) -> str:
         return self.name
