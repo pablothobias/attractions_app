@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'core',
     'attractions_info',
-    'reviews'
+    'reviews',
+    'address'
 ]
 
 MIDDLEWARE = [
