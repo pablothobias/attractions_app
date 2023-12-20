@@ -5,13 +5,19 @@ from address.models import Address
 
 # Create your models here.
 
+
 class Attraction(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
     approved = models.BooleanField(default=False)
     attractions_info = models.ManyToManyField(AttractionsInfo)
     reviews = models.ManyToManyField(Review)
-    address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    address = models.ForeignKey(
+        Address,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
 
     def __str__(self) -> str:
         return self.name
