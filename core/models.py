@@ -1,7 +1,8 @@
 from django.db import models
+
+from address.models import Address
 from attractions_info.models import AttractionsInfo
 from reviews.models import Review
-from address.models import Address
 
 # Create your models here.
 

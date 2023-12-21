@@ -9,4 +9,5 @@ class AttractionSerializer(ModelSerializer):
             "id",
             "name",
             "description",
+            "image",
         )

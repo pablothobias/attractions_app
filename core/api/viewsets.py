@@ -1,8 +1,10 @@
-from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
-from core.models import Attraction
-from .serializers import AttractionSerializer
 from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
+
+from core.models import Attraction
+
+from .serializers import AttractionSerializer
 
 
 class AttractionViewSet(ModelViewSet):
@@ -48,3 +50,16 @@ class AttractionViewSet(ModelViewSet):
     def report(self, request, pk=None):
         print("Custom action triggered")
         return Response({"Hello": "World"})
+
+    @action(methods=["get"], detail=True)
+    def get_by_param(self, request, pk=None):
+        id = self.request.query_params.get("id", None)
+        name = self.request.query_params.get("name", None)
+        if not id and not name:
+            return Response({"error": "You need to pass id or name param"})
+        else:
+            if id:
+                queryset = Attraction.objects.filter(id=id)
+            else:
+                queryset = Attraction.objects.filter(name__iexact=name)
+        return Response(self.serializer_class(queryset, many=True).data)
