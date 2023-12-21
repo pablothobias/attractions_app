@@ -1,4 +1,6 @@
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -8,6 +10,10 @@ from .serializers import AttractionSerializer
 
 
 class AttractionViewSet(ModelViewSet):
+    # Sets the model of authentication 👇🏻:
+    authentication_classes = (TokenAuthentication,)
+    # Sets the model of permission 👇🏻:
+    permission_classes = (IsAuthenticated,)
     queryset = Attraction.objects.all()
     serializer_class = AttractionSerializer
     filterset_fields = ("id", "name", "description", "approved")
