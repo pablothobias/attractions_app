@@ -12,6 +12,7 @@ class Attraction(models.Model):
     approved = models.BooleanField(default=False)
     attractions_info = models.ManyToManyField(AttractionsInfo)
     reviews = models.ManyToManyField(Review)
+    image = models.ImageField(upload_to="attractions", null=True, blank=True)
     address = models.ForeignKey(
         Address,
         on_delete=models.CASCADE,
