@@ -70,3 +70,11 @@ class AttractionViewSet(ModelViewSet):
             else:
                 queryset = Attraction.objects.filter(name__iexact=name)
         return Response(self.serializer_class(queryset, many=True).data)
+
+    @action(methods=["post"], detail=True)
+    def add_attraction_info(self, request, pk=None):
+        attraction_info = request.data.get("attractions_info_ids")
+        attraction = Attraction.objects.get(id=pk)
+        attraction.attractions_info.set(attraction_info)
+        attraction.save()
+        return Response(self.serializer_class(attraction).data)
