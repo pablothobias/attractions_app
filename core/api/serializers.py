@@ -28,14 +28,16 @@ class AttractionSerializer(ModelSerializer):
 
     def insert_address(self, attraction, address):
         address = Address.objects.create(**address)
-        attraction.address.add(address)
+        attraction.address = address
+        return attraction
 
     def create(self, validated_data):
         address = validated_data["address"]
         del validated_data["address"]
         attraction = Attraction.objects.create(**validated_data)
-        self.insert_address(attraction, address)
-        return attraction
+        update_attraction = self.insert_address(attraction, address)
+        update_attraction.save()
+        return update_attraction
 
     def get_name_id(self, obj):
         return obj.name + " - " + str(obj.id)
