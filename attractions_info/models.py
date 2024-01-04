@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class AttractionsInfo(models.Model):
     name = models.CharField(max_length=40)
     descriptions = models.TextField()
@@ -10,6 +11,5 @@ class AttractionsInfo(models.Model):
     close_hour = models.TimeField()
     min_age_enter = models.IntegerField()
 
-
-def __str__(self):
-    return self.name
+    def __str__(self):
+        return f"{self.name}"
